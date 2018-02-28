@@ -17,6 +17,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 
 /**
  * Program to create a collection, insert JSON objects, and perform simple queries on MongoDB.
@@ -142,6 +143,7 @@ public class QueryMongo
 
 		MongoCollection<Document> col = db.getCollection(COLLECTION_NAME);
 
+		col.updateOne(Filters.eq("key", key), new Document("$set", new Document("key", key*10).append("name", "text"+key*10)));
 	
 	}
     
