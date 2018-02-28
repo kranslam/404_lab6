@@ -175,8 +175,6 @@ public class QueryMongo
     	// Note: Make sure to return iterator() after do find. Example: col.find().iterator()
     	MongoCollection<Document> col = db.getCollection(COLLECTION_NAME);		
     	return col.find(Filters.lt("key", 4)).projection(fields(include("key", "name", "num"), excludeId())).iterator();		
-   
-    	
     }
     
     /**
