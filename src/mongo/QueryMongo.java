@@ -2,6 +2,11 @@ package mongo;
 
 import static com.mongodb.client.model.Projections.excludeId;
 import static com.mongodb.client.model.Projections.include;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static com.mongodb.client.model.Projections.fields;
 
 import org.bson.Document;
@@ -22,7 +27,7 @@ public class QueryMongo
 	/**
 	 * MongoDB database name
 	 */
-	public static final String DATABASE_NAME = "rlawrenc";
+	public static final String DATABASE_NAME = "kranslam";
 	
 	/**
 	 * MongoDB collection name
@@ -102,7 +107,7 @@ public class QueryMongo
 		// See: http://docs.mongodb.org/manual/reference/method/db.createCollection/
 		// See: http://mongodb.github.io/mongo-java-driver/3.4/driver/tutorials/databases-collections/
 		
-		
+		MongoCollection<Document> data = db.getCollection("data");
 		// TODO: Add 5 objects to collection of the form: key, name, num, values
 		// 		- where key is an increasing integer starting at 1 (i.e. 1, 2, 3, ...)
 		//		- name is "text"+key (e.g. "text1")
@@ -112,6 +117,17 @@ public class QueryMongo
 		// See: http://mongodb.github.io/mongo-java-driver/3.4/driver/getting-started/quick-start/
 		// See: http://docs.mongodb.org/manual/reference/method/db.collection.insert/
 		// See: http://api.mongodb.org/java/current/com/mongodb/BasicDBList.html
+		
+		
+		Document d1 = new Document("key", 1).append("name", "text1").append("num", 1).append("values",Arrays.asList(new Document("val",1).append("text","text1"),new Document("val",2).append("text","text2"),new Document("val",3).append("text","text3")));
+		Document d2 = new Document("key", 2).append("name", "text2").append("num", 2).append("values",Arrays.asList(new Document("val",2).append("text","text2"),new Document("val",3).append("text","text3"), new Document("val",4).append("text","text4")));
+		Document d3 = new Document("key", 3).append("name", "text3").append("num", 3).append("values",Arrays.asList(new Document("val",3).append("text","text3"),new Document("val",4).append("text","text4"), new Document("val",5).append("text","text5")));
+		Document d4 = new Document("key", 4).append("name", "text4").append("num", 4).append("values",Arrays.asList(new Document("val",4).append("text","text4"),new Document("val",5).append("text","text5"), new Document("val",6).append("text","text6")));
+		Document d5 = new Document("key", 5).append("name", "text5").append("num", 5).append("values",Arrays.asList(new Document("val",5).append("text","text5"),new Document("val",6).append("text","text6"), new Document("val",7).append("text","text7")));
+		
+		List<Document> documents = new ArrayList<Document>();
+		documents.add(d1);documents.add(d2);documents.add(d3);documents.add(d4);documents.add(d5);
+		data.insertMany(documents);
 				
 	}
     
