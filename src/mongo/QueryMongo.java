@@ -10,6 +10,7 @@ import java.util.List;
 import static com.mongodb.client.model.Projections.fields;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
@@ -192,7 +193,14 @@ public class QueryMongo
 	
     	// Note: Need to modify query as this is currently returning all documents
     	Document query = new Document();
-		return col.find(query).iterator();		
+	
+    	Bson filter = Filters.or(
+                Filters.gt("key", 2), 
+                Filters.elemMatch("values", Filters.eq("val", 4))
+                );
+    	
+    	return col.find(filter).projection(excludeId()).iterator();			
+	
     }          
     
     /**
