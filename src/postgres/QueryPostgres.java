@@ -55,7 +55,7 @@ public class QueryPostgres
     public Connection connect() throws SQLException
     {
     	// TODO: Modify this URL and user id and password for your own database
-    	String url = "jdbc:postgresql://cosc304.ok.ubc.ca/db_rlawrenc";
+    	String url = "jdbc:postgresql://cosc304.ok.ubc.ca/db_kranslam";
 		String uid = "rlawrenc";
 		String pw = "test";
 		
